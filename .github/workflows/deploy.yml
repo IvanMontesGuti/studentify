@@ -18,7 +18,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
     - name: Login to AWS
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -26,10 +25,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ secrets.AWS_REGION }}
-    - name: Deploy Application
-      run:
-        aws codedeploy create-deployment --aplication-name Studentify /
-          --deployment-group-name Backends /
-          --github-location repository=${{github.GITHUB_REPOSITORY}},commitId=${{github.GITHUB_SHA}} /
-          --region ${{ vars.REGION }}
-          --file-exists-behavior OVERWRITE
+    - run: |
+        aws codedeploy create-deployment \
+        --application-name Studentify \
+        --deployment-group-name Backends \
+        --github-location repository=${{ github.repository }},commitId=${{ github.sha }} \
+        --region ${{ vars.REGION }} \
+        --file-exists-behavior OVERWRITE
