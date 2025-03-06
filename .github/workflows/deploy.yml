@@ -26,9 +26,4 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ secrets.AWS_REGION }}
-    - name: Install CLI
-      uses: unfor19/install-aws-cli-action@v1
-      with:
-        version: 2                         # default
-        verbose: false                     # default
-        arch: amd64      
+      
