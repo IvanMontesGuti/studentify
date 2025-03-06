@@ -1,0 +1,19 @@
+name: Deploy Application
+
+on:
+  workflow_run:
+    workflows:
+      - Test Application
+    types:
+      - completed
+  
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v4
