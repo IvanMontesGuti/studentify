@@ -25,4 +25,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ secrets.AWS_REGION }}
-    
+    - name: Deploy Application
+      run:
+        aws deploy create-deployment --application-name Studentify \
+          --deployment-group-name Backends \
+          --github-location repository=${{ github.repository }},commitId=${{ github.sha }} \
+          --region ${{ secrets.AWS_REGION }} \
+          --file-exists-behavior OVERWRITE
