@@ -26,6 +26,9 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ secrets.AWS_REGION }}
     - name: Deploy 
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
       run:
         aws deploy create-deployment --application-name Studentify \
           --deployment-group-name Backends \
